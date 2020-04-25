@@ -12,6 +12,10 @@ namespace ScorchApi.Modules
             Mapper.Initialize((config) =>
             {
                 config.CreateMap<UserScorchHistory, UserScorchHistoryModel>().ReverseMap();
+                config.CreateMap<SearchOption, SearchOptionsModel>()
+                    .ReverseMap()
+                    .ForMember(x => x.UserId, ops => ops.Ignore())
+                    .ForMember(x => x.Id, ops => ops.Ignore());
             });
         }
     }

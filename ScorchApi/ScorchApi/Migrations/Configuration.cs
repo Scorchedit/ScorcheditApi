@@ -1,23 +1,64 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ScorchApi.Controllers;
+using ScorchApi.Models;
+using ScorchApi.Models.EfModels;
+
 namespace ScorchApi.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ScorchApi.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Models.ApplicationDbContext>
     {
+        private ApplicationDbContext context;
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ScorchApi.Models.ApplicationDbContext context)
+        protected override void Seed(Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            this.context = context;
+            PopulateSearchOptions();
+            context.SaveChanges();
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+        private void PopulateSearchOptions()
+        {
+            var categories = new List<string>
+            {
+                "Club Lounge",
+                "Restaurant Lounge",
+                "Pub/Bar",
+                "Bistro",
+                "Sports Lounge",
+                "Music Lounge",
+                "Live Entertainment",
+                "Festivals/Events"
+            };
+            var tags = new List<string>
+            {
+                "Food",
+                "Drinks",
+                "Entrance",
+            };
+
+            if (!context.Categories.Any())
+            {
+                context.Categories.AddRange(categories.Select(s => new Category
+                {
+                    Name = s
+                }));
+            }
+
+            if (!context.Tags.Any())
+            {
+                context.Tags.AddRange(tags.Select(s => new Tag
+                {
+                    Name = s
+                }));
+            }
         }
     }
 }

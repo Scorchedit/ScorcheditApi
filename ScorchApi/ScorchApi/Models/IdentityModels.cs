@@ -28,7 +28,11 @@ namespace ScorchApi.Models
 
         public virtual DbSet<UserScorchHistory> UserScorchHistories { get; set; }
         public virtual DbSet<Entity> Entities { get; set; }
-        
+        public virtual DbSet<Category> Categories{ get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<SearchOption> SearchOptions { get; set; }
+        public virtual DbSet<SearchConfig> SearchConfigs { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

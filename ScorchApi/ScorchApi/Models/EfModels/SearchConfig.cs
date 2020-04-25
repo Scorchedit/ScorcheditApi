@@ -7,14 +7,14 @@ using System.Web;
 
 namespace ScorchApi.Models.EfModels
 {
-    public class Entity
+    public class SearchConfig
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public int Latitude { get; set; }
-        public int Longitude { get; set; }
-
+        public string Key { get; set; }
+        public string Value { get; set; }
+        public string UserId { get; set; }
     }
 }

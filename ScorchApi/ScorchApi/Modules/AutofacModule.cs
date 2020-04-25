@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Autofac;
+﻿using Autofac;
 using AutoMapper;
 using ScorchApi.Models;
 using ScorchApi.Services;
@@ -15,7 +11,9 @@ namespace ScorchApi.Modules
         {
             ////Services
             builder.RegisterType<AppService>().AsImplementedInterfaces();
-            
+            builder.RegisterType<LocationService>().AsImplementedInterfaces();
+            builder.RegisterType<SetupService>().AsImplementedInterfaces();
+
             ////Other
             builder.RegisterType<ApplicationDbContext>();
             builder.RegisterType<Mapper>().AsImplementedInterfaces();
